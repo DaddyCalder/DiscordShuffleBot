@@ -26,7 +26,7 @@ ROLE_ID=admin_role_id
 
 
 4. Run the bot:
-python bot.py
+python Shuffler.py
 
 
 🔧 Configuration
