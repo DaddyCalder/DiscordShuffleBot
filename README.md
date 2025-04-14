@@ -1,90 +1,102 @@
-🔀 Discord Shuffle Bot
-A feature-rich Discord bot that automatically shuffles and reposts a custom list of users and links at regular intervals. Perfect for promoting social media creators, rotating featured content, or displaying randomized shoutouts. Built with Python, discord.py, and Flask for uptime support.
 
-🚀 Features:
+A Discord bot that posts and periodically shuffles a list of usernames and links (such as social media profiles or promotions) in a specific channel. Ideal for rotating exposure for artists, creators, or community projects.
 
-🔁 Automatically shuffles your list every X minutes.
+---
 
-✍️ Allows admins to post, track, and untrack messages for auto-updating.
+## 🔧 Features
 
-➕ Add or remove entries dynamically using commands.
+- ✅ Periodically shuffles a list every X minutes (default: 30min).
+- 🔁 Supports manual shuffle on command.
+- ➕ Add new users/links via command.
+- ➖ Remove users/links via command.
+- 🔍 Track specific messages to be shuffled.
+- 🚫 Untrack messages from auto-shuffle.
+- 🛠️ Flask server integration for hosting environments (like Replit).
+- 🛡️ Role-based access to commands.
 
-🔗 Supports editing existing bot messages with fresh shuffled content.
+---
 
-🔒 Role-protected commands to prevent misuse.
+## 📦 Setup Instructions
 
-🌐 Keep-alive server via Flask (ideal for Replit or other hosting platforms).
+### 1. Install Dependencies
 
-
-🛠️ Setup & Installation
-1. Clone the repo:
-
-git clone https://github.com/daddycalder/discordshufflebot.git
-
-cd discordshufflebot
-
-
-3. Install dependencies:
-
+```bash
 pip install -r requirements.txt
+```
 
+Make sure you have the following installed:
+- `discord.py`
+- `python-dotenv`
+- `flask`
 
-5. Create a .env file in the root directory with the following:
-   
+### 2. Environment Variables
+
+Create a `.env` file in the root folder with the following content:
+
+```
 DISCORD_TOKEN=your_discord_bot_token
+CHANNEL_ID=channel_for_the_bot_to_post_and_track
+ROLE_ID=your_bots_role
+```
 
-CHANNEL_ID=target_channel_id
+### 3. Running the Bot
 
-ROLE_ID=admin_role_id
+```bash
+python shuffler.py
+```
 
+---
 
-7. Run the bot:
-   
-python Shuffler.py
+## ⚙️ Commands
 
+All commands are prefixed with `!` by default.
 
-🔧 Configuration
-You can adjust the shuffle interval and other settings in the script:
+| Command | Description |
+|--------|-------------|
+| `!post` | Posts the current shuffled list and begins auto-shuffling it every X minutes |
+| `!shuffle <message_link>` | Manually reshuffles a bot message |
+| `!track <message_link>` | Begins auto-shuffling a specific message |
+| `!untrack <message_link>` | Stops auto-shuffling a message |
+| `!add <name> <link>` | Adds a new user/link to the list |
+| `!remove <name>` | Removes a user/link from the list |
 
-'shuffle_interval': 1800  # Time in seconds (1800s = 30 mins)
+**Note:** These commands require the configured role ID to be used.
 
-'command_prefix': '!'     # Change to your preferred prefix
+---
 
+## 🧪 Example Entry Format
 
-💬 Bot Commands:
-All commands require the user to have the configured role (ROLE_ID).
+```python
+entries = [
+    {"@name": "- @YourName", "link": "https://your-social-link.com"},
+    ...
+]
+```
 
-!post	Posts a new shuffled message to the configured channel and starts tracking it.
+---
 
-!shuffle <link>	Manually reshuffles a tracked message by its link.
+## 🌐 Hosting
 
-!track <link>	Start auto-shuffling a previously posted bot message.
+This bot uses a simple Flask server (`keep_alive`) to stay online in hosting platforms like Replit. If not needed, you can remove this part.
 
-!untrack <link>	Stops auto-shuffling a specific message.
+---
 
-!add <name> <link>	Adds a new entry to the shuffle list. Example: !add @NewUser https://link.com
+## 🛠️ Customization
 
-!remove <name>	Removes a user by name from the shuffle list. Partial matches allowed.
+- To change the shuffle interval, update `shuffle_interval` in `CONFIG`.
+- To modify the list of entries manually, edit the `entries` list directly in `shuffler.py`.
 
+---
 
-Note: Message links must follow this format:
-https://discord.com/channels/<guild_id>/<channel_id>/<message_id>
+## 🤖 Permissions Required
 
-🧠 How It Works:
-The bot maintains an internal list of name-link pairs.
+Make sure your bot has:
+- **Message Content Intent** enabled in the [Discord Developer Portal](https://discord.com/developers/applications).
+- Permissions to manage messages in the target channel.
 
-On an interval (default 30 minutes), it shuffles and updates the message content with a randomized version of the list.
+---
 
-Messages must be posted by the bot to be tracked or shuffled.
+# If you have any request or want your own custom bot for any task at all then join our community and give myself @Matt a message or DM. :)
 
-Commands are role-gated for security.
-
-🌐 Keep Alive (for Replit/Free Hosting):
-This bot includes a built-in Flask server to keep the bot alive when deployed on services like Replit. It listens on port 8080 and can be pinged periodically with an external uptime monitor.
-
-
-
-If you have any request or want your own custom bot for any task at all then join our community and give myself @Matt a message or DM. :)
-
-https://discord.gg/6eXGnRZE9V
+- https://discord.gg/6eXGnRZE9V
 
